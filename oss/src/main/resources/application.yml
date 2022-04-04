@@ -1,0 +1,27 @@
+server:
+  port: 9001
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 1000MB
+  application:
+    name: oss
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848 # nacosµÿ÷∑
+        namespace: 180ff210-4b23-465c-a596-b52c751d2edc
+
+aliyun:
+  endPoint: oss-cn-beijing.aliyuncs.com
+  urlPrefix: http://lvyiting.oss-cn-beijing.aliyuncs.com/
+  accessKeyId: LTAI5t993RxFv7iC7AcBWcaW
+  accessKeySecret: 5GduvEROBXuJ87qf0wH26olpIqhsqN
+  bucketName: lvyiting
+  fileHost: files
+
+
+
+
