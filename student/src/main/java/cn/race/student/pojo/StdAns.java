@@ -8,7 +8,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -46,11 +48,11 @@ public class StdAns implements Serializable {
     @TableField("qs_id")
     private Integer qsId;
 
-    /**
-     * 学生答案
-     */
-    @TableField("st_ans")
-    private String stAns;
+//    /**
+//     * 学生答案
+//     */
+//    @TableField("st_ans")
+//    private String stAns;
 
     /**
      * 学生得分
@@ -64,5 +66,7 @@ public class StdAns implements Serializable {
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
+    @TableField(exist = false)
+    private List<AnsDetails> list = new ArrayList<>();
 
 }

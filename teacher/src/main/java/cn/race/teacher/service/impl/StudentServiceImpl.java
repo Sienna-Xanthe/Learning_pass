@@ -4,9 +4,11 @@ import cn.race.teacher.output.OutStudents;
 import cn.race.teacher.pojo.Student;
 import cn.race.teacher.mapper.StudentMapper;
 import cn.race.teacher.service.IStudentService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,6 +26,16 @@ import java.util.List;
 @Service
 public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> implements IStudentService {
 
+    @Autowired
+    StudentMapper studentMapper;
+
+    @Override
+    public List<Student> selectBypr(Integer prId) {
+        LambdaQueryWrapper<Student> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(Student::getPrId,prId);
+        List<Student> students = studentMapper.selectList(lambdaQueryWrapper);
+        return students;
+      }
     @Override
     public Page<OutStudents> selectstudent(String name, Integer method, Integer pr_id, Integer page, Integer size) {
         //查询本班级所在学生

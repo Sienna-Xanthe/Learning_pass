@@ -14,6 +14,6 @@ import java.util.List;
  * @since 2022-03-30
  */
 public interface IStdAnsService extends IService<StdAns> {
-
+    List<StdAns> selectDe(Integer pubId, Integer stuId);
     List<Integer> delectans(Integer stId, Integer pubId);
 }

@@ -85,6 +85,9 @@ public class TsAns implements Serializable {
     @TableField("approve_id")
     private Integer approveId;
 
+    @TableField("st_id")
+    private Integer stId;
+
     /**
      * 批阅ip
      */

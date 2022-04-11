@@ -14,6 +14,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-03-30
  */
 public interface ITsAnsService extends IService<TsAns> {
+    int updateStdAns(Integer pubId,Integer stuId);
+    TsAns selectByStuIdAndPubId(Integer pubId,Integer stuId);
 
     Page<OutExam> selectExams(Page<OutExam> outExamPage, Integer st_id, Integer pr_id, Integer st_status_id);
 

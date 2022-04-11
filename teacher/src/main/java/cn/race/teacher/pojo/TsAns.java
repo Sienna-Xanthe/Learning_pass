@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,6 +35,9 @@ public class TsAns implements Serializable {
      */
     @TableField("pub_id")
     private Integer pubId;
+
+    @TableField("st_id")
+    private Integer stId;
 
     /**
      * 学生id
@@ -62,12 +67,14 @@ public class TsAns implements Serializable {
      * 学生开始作答时间
      */
     @TableField("st_start_time")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date stStartTime;
 
     /**
      * 学生提交时间
      */
     @TableField("st_submit_time")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date stSubmitTime;
 
     /**

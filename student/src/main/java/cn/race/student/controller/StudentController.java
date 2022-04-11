@@ -4,6 +4,11 @@ import cn.race.common.response.BusinessException;
 import cn.race.common.response.CommonErrorCode;
 import cn.race.common.response.Result;
 import cn.race.feign.clients.OssClient;
+import cn.race.student.dto.QsTotalDto;
+import cn.race.student.dto.TsDisDto;
+import cn.race.student.dto.TsPaperDto;
+import cn.race.student.pojo.*;
+import cn.race.student.service.*;
 import cn.race.student.pojo.Project;
 import cn.race.student.pojo.Student;
 import cn.race.student.pojo.SysRole;
@@ -11,6 +16,7 @@ import cn.race.student.pojo.SysUser;
 import cn.race.student.service.IStudentService;
 import cn.race.student.service.SysRoleService;
 import cn.race.student.service.SysUserService;
+
 import cn.race.student.util.JWTUtils;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -20,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +52,36 @@ public class StudentController {
     @Autowired
     OssClient ossClient;
 
+    @Autowired
+    ITsPaperService iTsPaperService;
+
+    @Autowired
+    ITsPublicService iTsPublicService;
+
+    @Autowired
+    ITsAnsService iTsAnsService;
+
+    @Autowired
+    ITsDisService tsDisService;
+
+    @Autowired
+    ITsDetailsService iTsDetailsService;
+
+    @Autowired
+    IQsTotalService iQsTotalService;
+
+
+    @Autowired
+    IQsOpService iQsOpService;
+
+    @Autowired
+    IStudentService iStudentService;
+    @Autowired
+    IStdAnsService iStdAnsService;
+
+    @Autowired
+    AnsDetailsService ansDetailsService;
+  
     @Autowired
     private IStudentService studentService;
 
@@ -120,6 +157,113 @@ public class StudentController {
         map.put("id",verify.getClaim("id").asString());
         return Result.succ("获取token成功",map);
     }
+
+    /**
+     * 显示答题页面
+     */
+    @GetMapping("showpaper/{pubId}")
+    public Result test(HttpServletRequest request,@PathVariable("pubId") Integer pubId) {
+        String token = request.getHeader("token");
+        DecodedJWT verify = JWTUtils.verify(token);
+        String username = verify.getClaim("username").asString();
+        String id = verify.getClaim("id").asString();
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("student",username);
+        //根据pubId查询paperId
+        Integer paperId = iTsPublicService.selectByPubId(pubId);
+
+        TsPaperDto tsPaperDto = iTsPaperService.selectById(paperId);
+        map.put("tsPaper",tsPaperDto);
+        List<TsDisDto> selectpaperdetail = tsDisService.selectpaperdetail(paperId);
+        map.put("tsDis",selectpaperdetail);
+        List<TsDetails> selectpaperdetail1 = iTsDetailsService.selectpaperdetail(paperId);
+        map.put("tsDetails",selectpaperdetail1);
+        //根据qsId查询
+        List<QsTotalDto> qsTotalDtoList = new ArrayList<>();
+        List<List<QsOp>> opList1 = new ArrayList<>();
+        for(TsDetails ts:selectpaperdetail1){
+            Integer qsId = ts.getQsId();
+            QsTotalDto qsTotalDto = iQsTotalService.selectpaperdetail(qsId);
+            qsTotalDtoList.add(qsTotalDto);
+            List<QsOp> qsOpList = iQsOpService.selectpaperdetail(qsId);
+            opList1.add(qsOpList);
+        }
+        map.put("qsTotal",qsTotalDtoList);
+        map.put("qsOp",opList1);
+        return Result.succ("查询成功",map);
+    }
+
+    /**
+     * 提交试卷
+     */
+    @PostMapping("commitpaper/{pubId}")
+    public Result commitpaper(HttpServletRequest request,@PathVariable("pubId") Integer pubId,@RequestBody List<StdAns> stdAnslist) {
+        String token = request.getHeader("token");
+        DecodedJWT verify = JWTUtils.verify(token);
+        String id = verify.getClaim("id").asString();
+        for(StdAns stdAns:stdAnslist){
+            int i = iStdAnsService.addStdAns(pubId, Integer.parseInt(id), stdAns);
+            List<AnsDetails> list = stdAns.getList();
+           for(AnsDetails ansDetails:list){
+            int i1 = ansDetailsService.addAnsDetails(i, ansDetails.getAns());
+           }
+        }
+        int i = iTsAnsService.updateStdAns(pubId, Integer.parseInt(id));
+        return Result.succ("添加成功",i);
+    }
+
+    /**
+     * 显示已经答题页面详情
+     */
+    @GetMapping("showpapercomplet/{pubId}")
+    public Result showpapercomplet(HttpServletRequest request,@PathVariable("pubId") Integer pubId){
+        String token = request.getHeader("token");
+        DecodedJWT verify = JWTUtils.verify(token);
+        String username = verify.getClaim("username").asString();
+        String id = verify.getClaim("id").asString();
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("student",username);
+        //根据pubId查询paperId
+        Integer paperId = iTsPublicService.selectByPubId(pubId);
+
+        TsAns tsAns = iTsAnsService.selectByStuIdAndPubId(pubId, Integer.parseInt(id));
+        map.put("tsAns",tsAns);
+
+        List<StdAns> stdAns = iStdAnsService.selectDe(pubId, Integer.parseInt(id));
+        List<List<AnsDetails>> ansDList = new ArrayList<>();
+        for(StdAns stdAns1:stdAns){
+            Integer id1 = stdAns1.getId();
+            List<AnsDetails> ansDetails = ansDetailsService.selectList(id1);
+            ansDList.add(ansDetails);
+        }
+
+        map.put("ansDetails",ansDList);
+        map.put("stdAns",stdAns);
+
+        TsPaperDto tsPaperDto = iTsPaperService.selectById(paperId);
+        map.put("tsPaper",tsPaperDto);
+        List<TsDisDto> selectpaperdetail = tsDisService.selectpaperdetail(paperId);
+        map.put("tsDis",selectpaperdetail);
+        List<TsDetails> selectpaperdetail1 = iTsDetailsService.selectpaperdetail(paperId);
+        map.put("tsDetails",selectpaperdetail1);
+        //根据qsId查询
+        List<QsTotalDto> qsTotalDtoList = new ArrayList<>();
+        List<List<QsOp>> opList1 = new ArrayList<>();
+        for(TsDetails ts:selectpaperdetail1){
+            Integer qsId = ts.getQsId();
+            QsTotalDto qsTotalDto = iQsTotalService.selectpaperdetail(qsId);
+            qsTotalDtoList.add(qsTotalDto);
+            List<QsOp> qsOpList = iQsOpService.selectpaperdetail(qsId);
+            opList1.add(qsOpList);
+        }
+        map.put("qsTotal",qsTotalDtoList);
+        map.put("qsOp",opList1);
+        return Result.succ("查询成功",map);
+    }
+
+
 
 
 

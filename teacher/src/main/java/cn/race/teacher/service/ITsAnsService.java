@@ -14,6 +14,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-03-30
  */
 public interface ITsAnsService extends IService<TsAns> {
+int addTsAns(Integer pubId, Integer stId,String name);
+TsAns selectById(Integer tsAnsId);
+int updateTsAns(Integer tsAnsId,TsAns tsAns);
 
     Page<OuTsStudents> selectStudents(Page<OuTsStudents> tsAnsPage, Integer pub_id, Integer st_status_id);
 

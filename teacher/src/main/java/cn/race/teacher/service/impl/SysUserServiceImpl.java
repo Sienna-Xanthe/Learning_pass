@@ -76,4 +76,20 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
         return sysUser;
     }
+
+    @Override
+    public String selectMail(Integer id) {
+        LambdaQueryWrapper<SysUser> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(SysUser::getId,id);
+        SysUser sysUser = sysUserMapper.selectOne(lambdaQueryWrapper);
+        return sysUser.getEmail();
+    }
+
+    @Override
+    public String selectName(Integer id) {
+        LambdaQueryWrapper<SysUser> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(SysUser::getId,id);
+        SysUser sysUser = sysUserMapper.selectOne(lambdaQueryWrapper);
+        return sysUser.getUsername();
+    }
 }

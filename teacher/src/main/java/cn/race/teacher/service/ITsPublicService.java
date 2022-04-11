@@ -14,6 +14,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-03-30
  */
 public interface ITsPublicService extends IService<TsPublic> {
+    int addTsPublic(TsPublic tsPublic, Integer paperId);
+    Integer selectByPubId(Integer pubId);
 
     Page<OutExams> selectexams(Page<OutExams> outExamsPage, Integer pr_id);
 }

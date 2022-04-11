@@ -1,16 +1,11 @@
 package cn.race.teacher.mapper;
 
+
 import cn.race.teacher.pojo.AnsDetails;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 
-/**
- * <p>
- *  Mapper 接口
- * </p>
- *
- * @author pxy
- * @since 2022-04-08
- */
+@Repository
 public interface AnsDetailsMapper extends BaseMapper<AnsDetails> {
 
 }

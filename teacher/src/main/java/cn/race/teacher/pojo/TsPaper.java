@@ -3,9 +3,13 @@ package cn.race.teacher.pojo;
 import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * <p>
@@ -21,6 +25,7 @@ import lombok.Setter;
 public class TsPaper implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
@@ -55,6 +60,9 @@ public class TsPaper implements Serializable {
     @TableField("pr_id")
     private Integer prId;
 
+    @TableField("ts_password")
+    private String tsPassword;
+
     /**
      * 0：未删除 1：删除
      */
@@ -68,5 +76,7 @@ public class TsPaper implements Serializable {
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
+    @TableField(exist = false)
+    List<TsDis> listDis = new ArrayList<>();
 
 }

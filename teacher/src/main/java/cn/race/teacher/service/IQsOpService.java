@@ -14,6 +14,7 @@ import java.util.List;
  * @since 2022-03-30
  */
 public interface IQsOpService extends IService<QsOp> {
+List<QsOp> selectpaperdetail(Integer qsId);
 
     boolean addQsOp(List<QsOp> qsOps);
 
