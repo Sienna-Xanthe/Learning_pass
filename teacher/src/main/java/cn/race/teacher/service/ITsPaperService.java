@@ -29,4 +29,5 @@ public interface ITsPaperService extends IService<TsPaper> {
 
     String selectPassword(Integer paperId);
 
+    Integer updateTsName(Integer id, String newname);
 }

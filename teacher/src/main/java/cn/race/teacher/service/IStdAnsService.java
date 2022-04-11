@@ -15,4 +15,5 @@ import java.util.List;
  */
 public interface IStdAnsService extends IService<StdAns> {
     List<StdAns> selectDe(Integer pubId, Integer stuId);
+    List<Integer> delectans(Integer stId, Integer pubId);
 }

@@ -4,6 +4,7 @@ import cn.race.teacher.pojo.QsOp;
 import cn.race.teacher.mapper.QsOpMapper;
 import cn.race.teacher.service.IQsOpService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,5 +31,17 @@ public class QsOpServiceImpl extends ServiceImpl<QsOpMapper, QsOp> implements IQ
         lambdaQueryWrapper.eq(QsOp::getQsId,qsId);
         List<QsOp> qsOps = qsOpMapper.selectList(lambdaQueryWrapper);
         return qsOps;
+    @Override
+    public boolean addQsOp(List<QsOp> qsOps) {
+        boolean b = this.saveBatch(qsOps);
+        return b;
+    }
+
+    @Override
+    public List<QsOp> selectByQsId(Integer id) {
+        QueryWrapper<QsOp> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("qs_id",id);
+        List<QsOp> qsOpList = this.baseMapper.selectList(queryWrapper);
+        return qsOpList;
     }
 }

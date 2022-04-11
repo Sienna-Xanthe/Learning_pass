@@ -15,4 +15,8 @@ import java.util.List;
  */
 public interface IQsOpService extends IService<QsOp> {
 List<QsOp> selectpaperdetail(Integer qsId);
+
+    boolean addQsOp(List<QsOp> qsOps);
+
+    List<QsOp> selectByQsId(Integer id);
 }

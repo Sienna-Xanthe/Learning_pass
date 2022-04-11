@@ -1,6 +1,7 @@
 package cn.race.teacher.service;
 
 import cn.race.teacher.pojo.Project;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -13,4 +14,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IProjectService extends IService<Project> {
 
+    int addProject(Project project);
+
+    Page<Project> selectByTcId(Integer tcId, String projectname, Integer page, Integer size);
+
+    int deleteById(Integer prId);
 }

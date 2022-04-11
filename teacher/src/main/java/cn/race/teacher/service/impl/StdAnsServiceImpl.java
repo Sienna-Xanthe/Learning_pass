@@ -6,10 +6,12 @@ import cn.race.teacher.mapper.StdAnsMapper;
 import cn.race.teacher.pojo.TsPublic;
 import cn.race.teacher.service.IStdAnsService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,5 +34,19 @@ public class StdAnsServiceImpl extends ServiceImpl<StdAnsMapper, StdAns> impleme
                 .eq(StdAns::getStId,stuId);
         List<StdAns> stdAns = stdAnsMapper.selectList(lambdaQueryWrapper);
         return stdAns;
+      }
+@Override
+    public List<Integer> delectans(Integer stId, Integer pubId) {
+        QueryWrapper<StdAns> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("st_id",stId)
+                .eq("pub_id",pubId);
+        List<StdAns> stdAns = baseMapper.selectList(queryWrapper);
+        List<Integer> ansIds = new ArrayList<>();
+        stdAns.forEach(stdAns1 -> {
+            ansIds.add(stdAns1.getId());
+        });
+
+        int delete = baseMapper.delete(queryWrapper);
+        return ansIds;
     }
 }

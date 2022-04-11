@@ -1,9 +1,12 @@
 package cn.race.teacher.service.impl;
 
+import cn.race.teacher.output.OutExams;
 import cn.race.teacher.pojo.TsPublic;
 import cn.race.teacher.mapper.TsPublicMapper;
 import cn.race.teacher.service.ITsPublicService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +42,13 @@ public class TsPublicServiceImpl extends ServiceImpl<TsPublicMapper, TsPublic> i
         lambdaQueryWrapper.eq(TsPublic::getId,pubId);
         TsPublic tsPublic = tsPublicMapper.selectOne(lambdaQueryWrapper);
         return tsPublic.getTsId();
+      }
+    @Override
+    public Page<OutExams> selectexams(Page<OutExams> outExamsPage, Integer pr_id) {
+        QueryWrapper<OutExams> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("pr_id", pr_id)
+                .eq("deleted", 0);
+        Page<OutExams> selectexams = baseMapper.selectexams(outExamsPage, queryWrapper);
+        return selectexams;
     }
 }

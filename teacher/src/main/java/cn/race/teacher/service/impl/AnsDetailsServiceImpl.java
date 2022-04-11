@@ -6,12 +6,15 @@ import cn.race.teacher.pojo.AnsDetails;
 import cn.race.teacher.service.AnsDetailsService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class AnsDetailsServiceImpl implements AnsDetailsService {
+public class AnsDetailsServiceImpl extends ServiceImpl<AnsDetailsMapper, AnsDetails> implements IAnsDetailsService {
 
     @Autowired
     AnsDetailsMapper ansDetailsMapper;
@@ -31,5 +34,12 @@ public class AnsDetailsServiceImpl implements AnsDetailsService {
         lambdaQueryWrapper.eq(AnsDetails::getAnsId,ansId);
         List<AnsDetails> ansDetails = ansDetailsMapper.selectList(lambdaQueryWrapper);
         return ansDetails;
+
+    @Override
+    public Integer deleteansdetails(List<Integer> delectans) {
+        QueryWrapper<AnsDetails> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("ans_id",delectans);
+        int delete = baseMapper.delete(queryWrapper);
+        return delete;
     }
 }

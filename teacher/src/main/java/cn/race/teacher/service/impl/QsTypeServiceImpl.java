@@ -6,6 +6,8 @@ import cn.race.teacher.service.IQsTypeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -17,4 +19,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class QsTypeServiceImpl extends ServiceImpl<QsTypeMapper, QsType> implements IQsTypeService {
 
+    @Override
+    public List<QsType> selecttypes() {
+        List<QsType> list = this.list();
+        return list;
+    }
 }
