@@ -14,7 +14,8 @@ public enum CommonErrorCode implements ErrorCode {
 	PHONE_EXIST(10003,"手机号已存在"),
 	ROLR_ERROR(10004,"角色不匹配"),
 	USER_NOTEXIST(10005,"用户或密码不存在"),
-	ROLE_NULL(1006,"角色为空"),
+	ROLE_NULL(10006,"角色为空"),
+	PASSWORD_NO(10007,"密码不一致"),
 
 	/////////////////////////////////////////////////
 

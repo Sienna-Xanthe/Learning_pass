@@ -3,6 +3,8 @@ package cn.race.teacher.service;
 import cn.race.teacher.pojo.Student;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -12,5 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-03-30
  */
 public interface IStudentService extends IService<Student> {
-
+List<Student> selectBypr(Integer prId);
 }

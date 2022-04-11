@@ -61,11 +61,11 @@ public class TsPublic implements Serializable {
     @TableField("total_num")
     private Integer totalNum;
 
-    /**
-     * 封存密码
-     */
-    @TableField("ts_pw")
-    private String tsPw;
+//    /**
+//     * 封存密码
+//     */
+//    @TableField("ts_pw")
+//    private String tsPw;
 
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Date createTime;
