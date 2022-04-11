@@ -45,11 +45,11 @@ public class StdAns implements Serializable {
     @TableField("qs_id")
     private Integer qsId;
 
-    /**
-     * 学生答案
-     */
-    @TableField("st_ans")
-    private String stAns;
+//    /**
+//     * 学生答案
+//     */
+//    @TableField("st_ans")
+//    private String stAns;
 
     /**
      * 学生得分
