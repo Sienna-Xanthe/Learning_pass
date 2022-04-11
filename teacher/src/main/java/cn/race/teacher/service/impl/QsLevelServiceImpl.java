@@ -6,6 +6,8 @@ import cn.race.teacher.service.IQsLevelService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -17,4 +19,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class QsLevelServiceImpl extends ServiceImpl<QsLevelMapper, QsLevel> implements IQsLevelService {
 
+    @Override
+    public List<QsLevel> selectlevels() {
+        List<QsLevel> list = this.list();
+        return list;
+    }
 }

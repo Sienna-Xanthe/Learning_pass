@@ -3,6 +3,8 @@ package cn.race.teacher.service;
 import cn.race.teacher.pojo.StdAns;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IStdAnsService extends IService<StdAns> {
 
+    List<Integer> delectans(Integer stId, Integer pubId);
 }

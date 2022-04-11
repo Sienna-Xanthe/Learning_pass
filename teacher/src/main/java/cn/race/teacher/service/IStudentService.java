@@ -1,6 +1,8 @@
 package cn.race.teacher.service;
 
+import cn.race.teacher.output.OutStudents;
 import cn.race.teacher.pojo.Student;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IStudentService extends IService<Student> {
 
+    Page<OutStudents> selectstudent(String name, Integer method, Integer pr_id, Integer page, Integer size);
 }

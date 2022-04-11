@@ -4,18 +4,19 @@ import cn.race.common.response.BusinessException;
 import cn.race.common.response.CommonErrorCode;
 import cn.race.common.response.Result;
 import cn.race.feign.clients.OssClient;
+import cn.race.student.pojo.Project;
+import cn.race.student.pojo.Student;
 import cn.race.student.pojo.SysRole;
 import cn.race.student.pojo.SysUser;
+import cn.race.student.service.IStudentService;
 import cn.race.student.service.SysRoleService;
 import cn.race.student.service.SysUserService;
 import cn.race.student.util.JWTUtils;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +44,9 @@ public class StudentController {
 
     @Autowired
     OssClient ossClient;
+
+    @Autowired
+    private IStudentService studentService;
 
     /**
      * 使用feign-api远程调用oss服务
@@ -115,6 +119,36 @@ public class StudentController {
         map.put("username", verify.getClaim("username").asString());
         map.put("id",verify.getClaim("id").asString());
         return Result.succ("获取token成功",map);
+    }
+
+
+
+    /**
+     * 学生查询课程
+     * @param st_id
+     * @param pr_name
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/selectprojects")
+    public Result selectProjects(@RequestParam Integer st_id, @RequestParam String pr_name ,@RequestParam Integer page,@RequestParam Integer size){
+        Page<Project> projectPage = new Page<>(page,size);
+        projectPage = studentService.selectProjects(projectPage,st_id,pr_name);
+//        return R.ok().message("查询成功").data("projects",projectPage);
+        return Result.succ("查询成功",projectPage);
+    }
+
+
+    @PostMapping("/addproject")
+    public Result addProject(@RequestBody Student student){
+        boolean save = studentService.save(student);
+        if(save) {
+//            return R.ok().message("插入成功");
+            return Result.succ("插入成功",null);
+        }
+//        return R.error().message("插入失败");
+        return Result.fail("插入失败");
     }
 
 }
