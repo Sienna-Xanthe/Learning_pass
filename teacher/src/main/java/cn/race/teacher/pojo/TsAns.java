@@ -35,6 +35,12 @@ public class TsAns implements Serializable {
     private Integer pubId;
 
     /**
+     * 学生id
+     */
+    @TableField("st_id")
+    private Integer stId;
+
+    /**
      * 学生姓名
      */
     @TableField("st_name")

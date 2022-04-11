@@ -3,6 +3,8 @@ package cn.race.teacher.service;
 import cn.race.teacher.pojo.QsType;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IQsTypeService extends IService<QsType> {
 
+    List<QsType> selecttypes();
 }

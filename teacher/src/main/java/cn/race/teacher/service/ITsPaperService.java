@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ITsPaperService extends IService<TsPaper> {
 
+    Integer updateTsName(Integer id, String newname);
 }

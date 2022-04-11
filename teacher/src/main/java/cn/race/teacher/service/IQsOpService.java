@@ -3,6 +3,8 @@ package cn.race.teacher.service;
 import cn.race.teacher.pojo.QsOp;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,4 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IQsOpService extends IService<QsOp> {
 
+    boolean addQsOp(List<QsOp> qsOps);
+
+    List<QsOp> selectByQsId(Integer id);
 }
