@@ -12,10 +12,10 @@ spring:
       filter:
         enabled: true
   application:
-    name: video  #·þÎñÃû³Æ
+    name: video  #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   cloud:
     nacos:
-      server-addr: 127.0.0.1:8848 # nacosµØÖ·
+      server-addr: 162.14.113.138:8848 # nacosï¿½ï¿½Ö·
       discovery:
           namespace: 180ff210-4b23-465c-a596-b52c751d2edc
 server:

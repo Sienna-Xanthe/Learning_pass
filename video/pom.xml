@@ -48,7 +48,7 @@
         </dependency>
         <dependency>
             <groupId>com.aliyun</groupId>
-            <artifactId>aliyun-sdk-vod-upload</artifactId>
+            <artifactId>aliyun-java-vod-upload</artifactId>
             <version>1.4.14</version>
         </dependency>
         <!--nacos服务注册发现依赖-->
@@ -68,5 +68,28 @@
             <version>1.0</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.6.4</version>
+                <configuration>
+                    <!-- 指定该 Main Class 为全局的唯一入口 -->
+                    <mainClass>cn.race.video.VideoApplication</mainClass>
+                    <layout>ZIP</layout>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <!-- 将依赖到的包都放进去 -->
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
