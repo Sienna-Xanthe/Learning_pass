@@ -3,7 +3,7 @@ package cn.race.teacher.service.impl;
 
 import cn.race.teacher.mapper.AnsDetailsMapper;
 import cn.race.teacher.pojo.AnsDetails;
-import cn.race.teacher.service.AnsDetailsService;
+import cn.race.teacher.service.IAnsDetailsService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,9 +31,10 @@ public class AnsDetailsServiceImpl extends ServiceImpl<AnsDetailsMapper, AnsDeta
     @Override
     public List<AnsDetails> selectList(Integer ansId) {
         LambdaQueryWrapper<AnsDetails> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(AnsDetails::getAnsId,ansId);
+        lambdaQueryWrapper.eq(AnsDetails::getAnsId, ansId);
         List<AnsDetails> ansDetails = ansDetailsMapper.selectList(lambdaQueryWrapper);
         return ansDetails;
+    }
 
     @Override
     public Integer deleteansdetails(List<Integer> delectans) {

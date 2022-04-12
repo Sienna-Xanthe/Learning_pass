@@ -63,7 +63,7 @@ public class TeacherController {
     IStdAnsService iStdAnsService;
 
     @Autowired
-    AnsDetailsService ansDetailsService;
+    IAnsDetailsService ansDetailsService;
 
     /**
      * 学生登录

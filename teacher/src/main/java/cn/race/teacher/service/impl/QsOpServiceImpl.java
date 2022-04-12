@@ -28,9 +28,10 @@ public class QsOpServiceImpl extends ServiceImpl<QsOpMapper, QsOp> implements IQ
     @Override
     public List<QsOp> selectpaperdetail(Integer qsId) {
         LambdaQueryWrapper<QsOp> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(QsOp::getQsId,qsId);
+        lambdaQueryWrapper.eq(QsOp::getQsId, qsId);
         List<QsOp> qsOps = qsOpMapper.selectList(lambdaQueryWrapper);
         return qsOps;
+    }
     @Override
     public boolean addQsOp(List<QsOp> qsOps) {
         boolean b = this.saveBatch(qsOps);
