@@ -23,6 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/teacher/tsPaper")
+@CrossOrigin(origins = "*",maxAge = 3600)
 public class TsPaperController {
 
     @Autowired

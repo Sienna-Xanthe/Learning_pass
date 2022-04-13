@@ -24,6 +24,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/teacher/")
+@CrossOrigin(origins = "*",maxAge = 3600)
 public class TeacherController {
     @Autowired
     private SysUserService sysUserService;
@@ -90,10 +91,15 @@ public class TeacherController {
                 Map<String, String> map1 = new HashMap<>();
                 map1.put("id", sysUser.getId().toString());
                 map1.put("username", sysUser.getUsername());
+                map1.put("avatar",sysUser.getAvatar());
+                map1.put("phone",sysUser.getPhone());
+                map1.put("email",sysUser.getEmail());
                 //生成token令牌
                 String token = JWTUtils.getToken(map1);
-
-                return Result.succ("登录成功",token);
+                Map<String, Object> maps = new HashMap<>();
+                maps.put("token",token);
+                maps.put("info",map1);
+                return Result.succ("登录成功",maps);
             }
         }
         return Result.fail("登录失败");
