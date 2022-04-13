@@ -19,6 +19,7 @@
         <module>admin</module>
 <!--        <module>teacher</module>-->
         <module>student</module>
+        <module>monitor</module>
 
     </modules>
 
