@@ -1,5 +1,5 @@
 server:
-  port: 10010
+  port: 10011
 #logging:
 #  level:
 #    cn.itcast: debug
@@ -7,52 +7,53 @@ server:
 #    dateformat: MM-dd HH:mm:ss:SSS
 spring:
   application:
-    name: gateway
+    name: gateways
   cloud:
     nacos:
-      server-addr: 162.14.113.138:8848 # nacos地址
       discovery:
-        namespace: 180ff210-4b23-465c-a596-b52c751d2edc
+        server-addr: 162.14.113.138:8848
+#       discovery:
+#         namespace: 180ff210-4b23-465c-a596-b52c751d2edc
 
 
     gateway:
       routes:
-        - id: student # 路由标示，必须唯一
-          uri: lb://student # 路由的目标地址
-          predicates: # 路由断言，判断请求是否符合规则
-            - Path=/student/** # 路径断言，判断路径是否是以/user开头，如果是则符合
+        - id: student    # 路由标示，必须唯一
+          uri: lb://student   # 路由的目标地址
+          predicates:     # 路由断言，判断请求是否符合规则
+          - Path=/student/**       # 路径断言，判断路径是否是以/user开头，如果是则符合
         - id: teacher
           uri: lb://teacher
           predicates:
-            - Path=/teacher/**
+          - Path=/teacher/**
         - id: video
           uri: lb://video
           predicates:
-              - Path=/video/**
+          - Path=/video/**
         - id: oss
           uri: lb://oss
           predicates:
-              - Path=/oss/**
+          - Path=/oss/**
         - id: excel
           uri: lb://excel
           predicates:
-              - Path=/excel/**
+          - Path=/excel/**
         - id: admin
           uri: lb://admin
           predicates:
-              - Path=/admin/**,/sys/**
+          - Path=/admin/**,/sys/**
 #      default-filters:
 #        - AddRequestHeader=Truth,Itcast is freaking awesome!
 
-lvyiting:
-  jwt:
-    secretKey: hydhcndhyeoskcuds$jwhdnsa28hcd
-    validateInMs: 360000
-  url:
-    white: /auth/login,/auth/logout
-  nacos:
-    gateway:
-      address: 127.0.0.1:8848
-      dataId: race-gateway
-      groupId: race-gateway
-      timeout: 50000
+# lvyiting:
+#   jwt:
+#     secretKey: hydhcndhyeoskcuds$jwhdnsa28hcd
+#     validateInMs: 360000
+#   url:
+#     white: /auth/login,/auth/logout
+#   nacos:
+#     gateway:
+#       address: 127.0.0.1:8848
+#       dataId: race-gateway
+#       groupId: race-gateway
+#       timeout: 50000
