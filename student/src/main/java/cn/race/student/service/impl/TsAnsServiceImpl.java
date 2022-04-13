@@ -47,10 +47,11 @@ public class TsAnsServiceImpl extends ServiceImpl<TsAnsMapper, TsAns> implements
     @Override
     public TsAns selectByStuIdAndPubId(Integer pubId, Integer stuId) {
         LambdaQueryWrapper<TsAns> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(TsAns::getPubId,pubId)
-                .eq(TsAns::getStId,stuId);
+        lambdaQueryWrapper.eq(TsAns::getPubId, pubId)
+                .eq(TsAns::getStId, stuId);
         TsAns tsAns = tsAnsMapper.selectOne(lambdaQueryWrapper);
         return tsAns;
+    }
 // =======
     @Override
     public Page<OutExam> selectExams(Page<OutExam> outExamPage, Integer st_id, Integer pr_id, Integer st_status_id) {

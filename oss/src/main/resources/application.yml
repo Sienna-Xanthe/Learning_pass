@@ -11,8 +11,8 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848 # nacosµØÖ·
-        namespace: 180ff210-4b23-465c-a596-b52c751d2edc
+        server-addr: 162.14.113.138:8848 # nacosï¿½ï¿½Ö·
+#         namespace: 180ff210-4b23-465c-a596-b52c751d2edc
 
 aliyun:
   endPoint: oss-cn-beijing.aliyuncs.com

@@ -16,4 +16,7 @@ import java.util.List;
 public interface IAnsDetailsService extends IService<AnsDetails> {
 
     Integer deleteansdetails(List<Integer> delectans);
+
+    int addAnsDetails(Integer ansId,String ans);
+    List<AnsDetails> selectList(Integer ansId);
 }

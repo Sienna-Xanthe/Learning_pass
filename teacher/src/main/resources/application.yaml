@@ -1,5 +1,5 @@
 server:
-  port: 9003
+  port: 9999
 # DataSource Config
 spring:
   datasource:
@@ -10,10 +10,10 @@ spring:
   cloud:
     nacos:
       discovery:
-        namespace: 180ff210-4b23-465c-a596-b52c751d2edc
-        server-addr:  127.0.0.1:8848 # nacos地址
+#        namespace: 180ff210-4b23-465c-a596-b52c751d2edc
+        server-addr: 162.14.113.138:8848 # nacos地址
   application:
-   name: teacher
+   name: teachers
   mail:
     username: 907167912@qq.com
     password: whbiswbfobqxbajh

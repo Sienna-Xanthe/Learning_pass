@@ -36,8 +36,6 @@ public class TsAns implements Serializable {
     @TableField("pub_id")
     private Integer pubId;
 
-    @TableField("st_id")
-    private Integer stId;
 
     /**
      * 学生id

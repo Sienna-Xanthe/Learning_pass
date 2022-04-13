@@ -153,9 +153,10 @@ public class QsTotalServiceImpl extends ServiceImpl<QsTotalMapper, QsTotal> impl
     @Override
     public QsTotalDto selectpaperdetail(Integer qsId) {
         LambdaQueryWrapper<QsTotal> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(QsTotal::getId,qsId);
+        lambdaQueryWrapper.eq(QsTotal::getId, qsId);
         QsTotal qsTotal = qsTotalMapper.selectOne(lambdaQueryWrapper);
         return QsTotalConvert.INSTANCE.entity2Dto(qsTotal);
+    }
     @Override
     public int addQsTotal(QsTotal qsTotal) {
         int insert = baseMapper.insert(qsTotal);

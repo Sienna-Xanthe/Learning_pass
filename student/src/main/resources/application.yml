@@ -10,8 +10,8 @@ spring:
   cloud:
     nacos:
       discovery:
-        namespace: 180ff210-4b23-465c-a596-b52c751d2edc
-        server-addr:  127.0.0.1:8848 # nacos地址
+#         namespace: 180ff210-4b23-465c-a596-b52c751d2edc
+        server-addr:  162.14.113.138:8848 # nacos地址
   application:
    name: student
 
