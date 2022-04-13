@@ -11,9 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @FeignClient(value = "oss",configuration = FeignMultipartConfig.class)
 @Component
-
 public interface OssClient {
-
-    @PostMapping(value = "oss/upload",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/upload",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     Result upload(@RequestPart("file") MultipartFile file);
 }

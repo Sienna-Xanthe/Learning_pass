@@ -22,7 +22,7 @@ public class OssController {
      * @author: csp1999
      */
 
-    @PostMapping("/oss/upload")
+    @PostMapping("/upload")
     public Result upload(@RequestParam("file") MultipartFile file) {
 
         if (file != null) {
