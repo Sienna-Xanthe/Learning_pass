@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2022-04-07
  */
 @RestController
+@CrossOrigin(origins = "*",maxAge = 3600)
 @RequestMapping("/teacher/student")
 public class StudentController {
     @Autowired
