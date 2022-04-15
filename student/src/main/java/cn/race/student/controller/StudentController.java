@@ -26,10 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -116,9 +113,11 @@ public class StudentController {
         }
 
         SysUser sysUser = sysUserService.login(username, password);
+
         List<SysRole> sysRoles = sysUser.getSysRoles();
+
         for(SysRole sysRole:sysRoles){
-            if(sysRole.getCode().equals(role)){
+            if(sysRole.getCode().equals(role) && ("student".equals(role) || "admin".equals(role))){
                 Map<String, String> map1 = new HashMap<>();
                 map1.put("id", sysUser.getId().toString());
                 map1.put("username", sysUser.getUsername());

@@ -87,7 +87,7 @@ public class TeacherController {
         SysUser sysUser = sysUserService.login(username, password);
         List<SysRole> sysRoles = sysUser.getSysRoles();
         for(SysRole sysRole:sysRoles){
-            if(sysRole.getCode().equals(role)){
+            if(sysRole.getCode().equals(role)&& ("teacher".equals(role) || "admin".equals(role))){
                 Map<String, String> map1 = new HashMap<>();
                 map1.put("id", sysUser.getId().toString());
                 map1.put("username", sysUser.getUsername());
