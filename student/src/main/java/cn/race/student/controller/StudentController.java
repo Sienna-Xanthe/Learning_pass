@@ -241,9 +241,9 @@ public class StudentController {
         String id = verify.getClaim("id").asString();
         for(StdAns stdAns:stdAnslist){
             int i = iStdAnsService.addStdAns(pubId, Integer.parseInt(id), stdAns);
-            List<AnsDetails> list = stdAns.getList();
-           for(AnsDetails ansDetails:list){
-            int i1 = ansDetailsService.addAnsDetails(i, ansDetails.getAns());
+            List<String> list = stdAns.getList();
+            for(String ansDetails:list){
+            int i1 = ansDetailsService.addAnsDetails(i, ansDetails);
            }
         }
         int i = iTsAnsService.updateStdAns(pubId, Integer.parseInt(id));
@@ -330,6 +330,17 @@ public class StudentController {
         }
 //        return R.error().message("插入失败");
         return Result.fail("插入失败");
+    }
+
+
+    public static void main(String[] args) {
+        List<String> list = new ArrayList<>();
+        list.add("hahhaha");
+        list.add("hahsdaasffhaha");
+        list.add("hah安徽萨斯haha");
+        list.add("sddfdfdf");
+        System.out.println(list);
+
     }
 
 }
