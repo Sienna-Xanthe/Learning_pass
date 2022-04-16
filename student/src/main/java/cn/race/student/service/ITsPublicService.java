@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ITsPublicService extends IService<TsPublic> {
 Integer selectByPubId(Integer pubId);
+String selectSing(Integer pubId);
 }

@@ -127,9 +127,9 @@ public class SysUserController extends BaseController {
 
 	}
 
-	@PostMapping("/repass")
+	@GetMapping("/repass")
 	@PreAuthorize("hasAuthority('sys:user:repass')")
-	public Result repass(@RequestBody Long userId) {
+	public Result repass(Long userId) {
 
 		SysUser sysUser = sysUserService.getById(userId);
 

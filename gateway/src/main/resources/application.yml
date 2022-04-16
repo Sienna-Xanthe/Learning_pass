@@ -1,5 +1,5 @@
 server:
-  port: 10011
+  port: 10001
 #logging:
 #  level:
 #    cn.itcast: debug
@@ -7,11 +7,11 @@ server:
 #    dateformat: MM-dd HH:mm:ss:SSS
 spring:
   application:
-    name: gateways
+    name: gateway
   cloud:
     nacos:
       discovery:
-        server-addr: 162.14.113.138:8848
+        server-addr: 121.43.101.184:8848
 #       discovery:
 #         namespace: 180ff210-4b23-465c-a596-b52c751d2edc
 
@@ -42,18 +42,24 @@ spring:
           uri: lb://admin
           predicates:
           - Path=/admin/**,/sys/**
-#      default-filters:
-#        - AddRequestHeader=Truth,Itcast is freaking awesome!
 
-# lvyiting:
-#   jwt:
-#     secretKey: hydhcndhyeoskcuds$jwhdnsa28hcd
-#     validateInMs: 360000
-#   url:
-#     white: /auth/login,/auth/logout
-#   nacos:
-#     gateway:
-#       address: 127.0.0.1:8848
-#       dataId: race-gateway
-#       groupId: race-gateway
-#       timeout: 50000
+#spring:
+#  cloud:
+#    gateway:
+#      httpclient:
+#        #默认为毫秒单位，connect-timeout 默认时长为45s
+#        connect-timeout: 5000
+#        #点进源码可设置不同单位，我这里设置为5s
+#        response-timeout: 5s
+#      routes:
+#        - id: server-product
+#          uri: lb://demo-product
+#          predicates:
+#            - Path=/lei-app/product/**,/zs/{aa}
+#          filters:
+#            - StripPrefix=1
+#          # 针对于当前路由的http超时时间设置
+#          metadata:
+#            response-timeout: 2000
+#            connect-timeout: 2000
+

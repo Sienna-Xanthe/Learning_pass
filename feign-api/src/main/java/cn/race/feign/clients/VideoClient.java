@@ -12,6 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 @FeignClient(value = "video",configuration = FeignMultipartConfig.class)
 @Component
 public interface VideoClient {
-    @PostMapping(value = "uploadAlyVideo",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/uploadAlyVideo",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     Result uploadAlyVideo(@RequestParam("file") MultipartFile file);
 }

@@ -70,6 +70,9 @@ public class TsPublic implements Serializable {
     @TableField("total_num")
     private Integer totalNum;
 
+    @TableField("sing")
+    private String sing;
+
 //    /**
 //     * 封存密码
 //     */
