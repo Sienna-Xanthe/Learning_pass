@@ -3,6 +3,7 @@ package cn.race.student.controller;
 import cn.race.common.response.Result;
 import cn.race.student.output.OutExam;
 import cn.race.student.service.ITsAnsService;
+import cn.race.student.service.ITsPublicService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,9 @@ public class TsAnsController {
     @Autowired
     private ITsAnsService iTsAnsService;
 
+    @Autowired
+    ITsPublicService iTsPublicService;
+
     /**
      * 查看考试
      */
@@ -32,6 +36,21 @@ public class TsAnsController {
 //        return R.ok().message("查询成功").data("exam",outExamPage);
         return Result.succ("查询成功",outExamPage);
 
+    }
+
+    /**
+     * 进入考试获取语音播报
+     */
+    @PostMapping("/inputexam")
+    public Result inputexam(Integer pubId){
+        String s = iTsPublicService.selectSing(pubId);
+        if(s != null)
+        {
+//            return R.ok().message("更新成功");
+            return Result.succ("查询成功",s);
+        }
+//        return R.ok().message("更新失败");
+        return Result.fail("查询失败，没有数据");
     }
 
     /**

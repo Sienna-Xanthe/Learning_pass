@@ -3,7 +3,9 @@ package cn.race.student.controller;
 import cn.race.common.response.BusinessException;
 import cn.race.common.response.CommonErrorCode;
 import cn.race.common.response.Result;
+import cn.race.feign.clients.ExcelClient;
 import cn.race.feign.clients.OssClient;
+import cn.race.feign.clients.VideoClient;
 import cn.race.student.dto.QsTotalDto;
 import cn.race.student.dto.TsDisDto;
 import cn.race.student.dto.TsPaperDto;
@@ -83,6 +85,12 @@ public class StudentController {
     @Autowired
     private IStudentService studentService;
 
+    @Autowired
+    VideoClient videoClient;
+    
+    @Autowired
+    ExcelClient excelClient;
+
     /**
      * 使用feign-api远程调用oss服务
      * @param file
@@ -93,6 +101,30 @@ public class StudentController {
         Result upload = ossClient.upload(file);
         return upload;
     }
+
+    /**
+     * 使用feign-api远程调用视频点播服务
+     * @param file
+     * @return
+     */
+    @PostMapping("getVideo")
+    public Result getVideo(@RequestParam("file") MultipartFile file){
+        Result result = videoClient.uploadAlyVideo(file);
+        return result;
+    }
+
+    /**
+     * 使用excel远程调用视频点播服务
+     * @param file
+     * @return
+     */
+    @PostMapping("getExcel")
+    public Result getExcel(@RequestParam("file") MultipartFile file){
+        Result result = excelClient.simpleRead(file);
+        return result;
+    }
+    
+    
 
     /**
      * 学生登录

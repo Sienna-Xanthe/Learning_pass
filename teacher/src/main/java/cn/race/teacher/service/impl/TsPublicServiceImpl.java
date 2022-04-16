@@ -1,6 +1,7 @@
 package cn.race.teacher.service.impl;
 
 import cn.race.teacher.output.OutExams;
+import cn.race.teacher.output.OutGrage;
 import cn.race.teacher.pojo.TsPublic;
 import cn.race.teacher.mapper.TsPublicMapper;
 import cn.race.teacher.service.ITsPublicService;
@@ -10,6 +11,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -50,5 +53,23 @@ public class TsPublicServiceImpl extends ServiceImpl<TsPublicMapper, TsPublic> i
                 .eq("deleted", 0);
         Page<OutExams> selectexams = baseMapper.selectexams(outExamsPage, queryWrapper);
         return selectexams;
+    }
+
+    @Override
+    public List<OutGrage> showallcard() {
+        List<OutGrage> outGrages = tsPublicMapper.selectAllGrage();
+        return outGrages;
+    }
+
+    @Override
+    public List<OutGrage> showcardbyname(String stuname) {
+        List<OutGrage> showcardbyname = tsPublicMapper.showcardbyname(stuname);
+        return showcardbyname;
+    }
+
+    @Override
+    public List<OutGrage> showcardbyTs(String tsName) {
+        List<OutGrage> outGrages = tsPublicMapper.showcardbyTs(tsName);
+        return outGrages;
     }
 }
