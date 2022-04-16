@@ -63,7 +63,11 @@ public class StdAns implements Serializable {
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
+//    @TableField(exist = false)
+//    private List<AnsDetails> list = new ArrayList<>();
+
     @TableField(exist = false)
-    private List<AnsDetails> list = new ArrayList<>();
+    private List<String> list = new ArrayList<>();
+
 
 }
