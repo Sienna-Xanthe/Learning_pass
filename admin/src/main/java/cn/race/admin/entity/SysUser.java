@@ -30,7 +30,6 @@ public class SysUser extends BaseEntity {
     private String email;
 
     @NotBlank(message = "电话号码不能为空")
-    @Pattern(regexp = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(17[013678])|(18[0,5-9]))\\d{8}$",message = "手机号码格式不正确")
     private String phone;
 
     private String sex;
