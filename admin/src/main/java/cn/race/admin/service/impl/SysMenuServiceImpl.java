@@ -29,6 +29,9 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 	@Autowired
 	SysUserMapper sysUserMapper;
 
+	@Autowired
+	SysMenuMapper sysMenuMapper;
+
 	@Override
 	public List<SysMenuDto> getCurrentUserNav() {
 		String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -51,6 +54,12 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 
 		// 转成树状结构
 		return buildTreeMenu(sysMenus);
+	}
+
+	@Override
+	public SysMenu selectById(Long id) {
+		SysMenu sysMenu = sysMenuMapper.selectById(id);
+		return sysMenu;
 	}
 
 	private List<SysMenuDto> convert(List<SysMenu> menuTree) {
