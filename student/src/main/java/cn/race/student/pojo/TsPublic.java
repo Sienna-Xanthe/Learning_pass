@@ -1,6 +1,7 @@
 package cn.race.student.pojo;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,6 +31,9 @@ public class TsPublic implements Serializable {
      */
     @TableField("ts_id")
     private Integer tsId;
+
+    @TableField("sing")
+    private String sing;
 
     /**
      * 开始时间

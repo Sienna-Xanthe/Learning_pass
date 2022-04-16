@@ -28,4 +28,12 @@ public class TsPublicServiceImpl extends ServiceImpl<TsPublicMapper, TsPublic> i
         TsPublic tsPublic = tsPublicMapper.selectOne(lambdaQueryWrapper);
         return tsPublic.getTsId();
     }
+
+    @Override
+    public String selectSing(Integer pubId) {
+        LambdaQueryWrapper<TsPublic> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(TsPublic::getId,pubId);
+        TsPublic tsPublic = tsPublicMapper.selectOne(lambdaQueryWrapper);
+        return tsPublic.getSing();
+    }
 }

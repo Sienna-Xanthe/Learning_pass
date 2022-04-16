@@ -11,15 +11,28 @@ spring:
     nacos:
       discovery:
 #        namespace: 180ff210-4b23-465c-a596-b52c751d2edc
-        server-addr: 162.14.113.138:8848 # nacos地址
+        server-addr: 121.43.101.184:8848 # nacos地址
   application:
    name: teachers
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
   mail:
     username: 907167912@qq.com
     password: whbiswbfobqxbajh
     default-encoding: UTF-8
     protocol: smtp
     host: smtp.qq.com
+  messages:
+    basename: i18n/messages
+  profiles:
+      active: prod
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
 
 
 
@@ -33,6 +46,17 @@ mybatis-plus:
    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #日志文件
 
 
+aliyun:
+  endPoint: oss-cn-beijing.aliyuncs.com
+  urlPrefix: http://lvyiting.oss-cn-beijing.aliyuncs.com/
+  accessKeyId: LTAI5t993RxFv7iC7AcBWcaW
+  accessKeySecret: 5GduvEROBXuJ87qf0wH26olpIqhsqN
+  bucketName: lvyiting
+  fileHost: files
+  vod:
+    file:
+      keyid: LTAI5t993RxFv7iC7AcBWcaW
+      keysecret: 5GduvEROBXuJ87qf0wH26olpIqhsqN
 
 
 
