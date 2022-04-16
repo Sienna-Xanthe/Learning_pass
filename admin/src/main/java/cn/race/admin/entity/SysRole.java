@@ -29,4 +29,7 @@ public class SysRole extends BaseEntity {
     @TableField(exist = false)
     private List<Long> menuIds = new ArrayList<>();
 
+    @TableField(exist = false)
+    private List<SysMenu> menu = new ArrayList<>();
+
 }

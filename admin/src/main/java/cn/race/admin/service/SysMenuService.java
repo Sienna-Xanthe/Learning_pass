@@ -14,4 +14,6 @@ public interface SysMenuService extends IService<SysMenu> {
 
 	List<SysMenu> tree();
 
+	SysMenu selectById(Long id);
+
 }

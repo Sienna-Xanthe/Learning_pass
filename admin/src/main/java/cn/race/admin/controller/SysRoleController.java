@@ -3,12 +3,15 @@ package cn.race.admin.controller;
 
 import cn.hutool.core.util.StrUtil;
 import cn.race.admin.common.lang.Const;
+import cn.race.admin.entity.SysMenu;
 import cn.race.admin.entity.SysRole;
 import cn.race.admin.entity.SysRoleMenu;
 import cn.race.admin.entity.SysUserRole;
+import cn.race.admin.service.SysMenuService;
 import cn.race.common.response.Result;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -25,6 +28,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/sys/role")
 public class SysRoleController extends BaseController {
 
+	@Autowired
+	SysMenuService sysMenuService;
+
 	@PreAuthorize("hasAuthority('sys:role:list')")
 	@GetMapping("/info/{id}")
 	public Result info(@PathVariable("id") Long id) {
@@ -34,8 +40,13 @@ public class SysRoleController extends BaseController {
 		// 获取角色相关联的菜单id
 		List<SysRoleMenu> roleMenus = sysRoleMenuService.list(new QueryWrapper<SysRoleMenu>().eq("role_id", id));
 		List<Long> menuIds = roleMenus.stream().map(p -> p.getMenuId()).collect(Collectors.toList());
-
-		sysRole.setMenuIds(menuIds);
+		List<SysMenu> list = new ArrayList<>();
+		for(Long menu:menuIds){
+			SysMenu sysMenu = sysMenuService.selectById(menu);
+			list.add(sysMenu);
+		}
+		sysRole.setMenu(list);
+//		sysRole.setMenuIds(menuIds);
 		return Result.succ(sysRole);
 	}
 
