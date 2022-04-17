@@ -3,7 +3,9 @@
 package cn.race.common.response;
 
 
+import lombok.Data;
 
+@Data
 public class BusinessException extends RuntimeException {
 
 
