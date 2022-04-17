@@ -4,6 +4,7 @@ package cn.race.common.response;
 /**
  * 异常编码
  */
+
 public enum CommonErrorCode implements ErrorCode {
 	/////////////////////////////////////////////////
 	NAME_NULL(10000,"名字为空"),
