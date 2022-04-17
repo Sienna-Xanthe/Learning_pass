@@ -81,6 +81,7 @@ public class AnalyzeController {
     public Result exportExcel(HttpServletResponse response,@RequestBody List<OutGrage> outGrage) {
         try {
             String fileName = "成绩导出_" + RandomUtils.nextInt(3)+ ".xlsx";
+            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
             //导出excel
             EasyExcel.write(response.getOutputStream(), CustomerInfoExcel.class).sheet("学生成绩统计表").doWrite(outGrage);
