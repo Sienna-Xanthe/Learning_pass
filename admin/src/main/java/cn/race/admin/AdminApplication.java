@@ -3,9 +3,9 @@ package cn.race.admin;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+//@MapperScan("cn.race.admin.mapper")
 
 @SpringBootApplication
-@MapperScan("cn.race.admin.mapper")
 public class AdminApplication {
 
     public static void main(String[] args) {

@@ -6,13 +6,14 @@ import cn.race.teacher.output.OutGrage;
 import cn.race.teacher.service.ITsPublicService;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.nacos.client.naming.utils.RandomUtils;
-import com.sun.deploy.net.URLEncoder;
+//import com.sun.deploy.net.URLEncoder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;

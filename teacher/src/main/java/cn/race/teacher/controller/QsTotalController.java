@@ -114,7 +114,7 @@ public class QsTotalController {
     /**
      * 查询题库
      */
-    @GetMapping("/selectquestion")
+    @PostMapping("/selectquestion")
     public Result selectQuestion(@RequestBody InputSlctQs inputSlctQs) {
         Page<OutQsTotal> page = iQsTotalService.selectByTcId(inputSlctQs);
 //        return R.ok().data("page",page).message("查询成功");

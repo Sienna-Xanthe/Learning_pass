@@ -142,7 +142,7 @@
         </dependency>
         <dependency>
             <groupId>com.aliyun</groupId>
-            <artifactId>aliyun-sdk-vod-upload</artifactId>
+            <artifactId>aliyun-java-vod-upload</artifactId>
             <version>1.4.14</version>
         </dependency>
     </dependencies>

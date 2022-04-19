@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
-@MapperScan("cn.race.student.mapper")
+//@MapperScan("cn.race.student.mapper")
 @EnableFeignClients(basePackages = "cn.race.feign.clients",defaultConfiguration = DefaultFeignConfiguration.class)
 public class StudentApplication {
 

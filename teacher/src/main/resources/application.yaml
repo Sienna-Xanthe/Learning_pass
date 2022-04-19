@@ -11,7 +11,7 @@ spring:
     nacos:
       discovery:
 #        namespace: 180ff210-4b23-465c-a596-b52c751d2edc
-        server-addr: 121.43.101.184:8848 # nacos地址
+        server-addr: 162.14.113.138:8848
   application:
    name: teachers
   servlet:
