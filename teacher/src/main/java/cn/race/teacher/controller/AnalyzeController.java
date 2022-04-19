@@ -78,26 +78,49 @@ public class AnalyzeController {
      * 导出成绩到excle
      * @return
      */
-    @RequestMapping(value = "/export")
-    public Result exportExcel(HttpServletResponse response,@RequestBody List<OutGrage> outGrage) {
-        try {
-            String fileName = "成绩导出_" + RandomUtils.nextInt(3)+ ".xlsx";
-            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
-            //导出excel
-            EasyExcel.write(response.getOutputStream(), CustomerInfoExcel.class).sheet("学生成绩统计表").doWrite(outGrage);
-            return Result.succ("成绩导出成功");
-        } catch (Exception e) {
-            return Result.succ("成绩导出异常");
-        } finally {
+//    @RequestMapping(value = "/export")
+//    public Result exportExcel(HttpServletResponse response,@RequestBody List<OutGrage> outGrage) {
+//        try {
+//            String fileName = "成绩导出_" + RandomUtils.nextInt(3)+ ".xlsx";
+////            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8");
+//            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+////            response.setContentType("text/xml");
+//            response.setContentType("application/vnd.ms-excel");
+//            //导出excel
+//            EasyExcel.write(response.getOutputStream(), CustomerInfoExcel.class).sheet("学生成绩统计表").doWrite(outGrage);
+//            return Result.succ("成绩导出成功");
+//        } catch (Exception e) {
+//            return Result.succ("成绩导出异常");
+//        } finally {
+//            try {
+//                response.flushBuffer();
+//            } catch (IOException e) {
+//                log.error("业务订单导出输出流关闭失败: {}", e);
+//            }
+//        }
+//    }
+
+
+        @RequestMapping(value = "/export")
+    public void exportExcel(HttpServletResponse response,@RequestBody List<OutGrage> outGrage) {
             try {
-                response.flushBuffer();
-            } catch (IOException e) {
-                log.error("业务订单导出输出流关闭失败: {}", e);
+                response.setContentType("application/vnd.ms-excel");
+                response.setCharacterEncoding("utf-8");
+                String fileName = URLEncoder.encode("成绩", "UTF-8");
+                response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+                EasyExcel.write(response.getOutputStream(), CustomerInfoExcel.class).sheet("模板").doWrite(outGrage);
+            } catch (Exception e) {
+                log.error("下载文件失败，失败原因{}", e.getMessage());
+                // 重置response
+                response.reset();
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+                try {
+                    response.getWriter().println("错误");
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+
             }
         }
-    }
-
-
-
-
 }

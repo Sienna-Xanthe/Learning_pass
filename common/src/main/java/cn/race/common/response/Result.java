@@ -1,10 +1,14 @@
 package cn.race.common.response;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
 @Data
+@Getter
+@Setter
 public class Result implements Serializable {
 
 	private int code;
